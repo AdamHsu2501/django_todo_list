@@ -1,0 +1,29 @@
+{% extends 'todo_list/main.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container">
+
+    <div class="mb-5">
+        <a class="btn btn-outline-primary" href="{% url 'tasks' %}">Go Back</a>
+    </div>
+
+    <form method="post" class="mb-5">
+        {% csrf_token %}
+        <div class="mb-3">
+            {{ form.username|as_crispy_field }}
+        </div>
+        <div class="mb-3">
+            {{ form.password1|as_crispy_field }}
+        </div>
+        <div class="mb-3">
+            {{ form.password2|as_crispy_field }}
+        </div>
+        <input class="btn btn-primary" type="submit" value="Register">
+    </form>
+
+    <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+
+</div>
+
+{% endblock content %}

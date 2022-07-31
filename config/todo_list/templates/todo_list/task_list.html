@@ -1,0 +1,54 @@
+{% extends 'todo_list/main.html' %}
+{% block content %}
+
+<div class="container">
+    <div class="mb-5">
+        <a class="btn btn-primary" href="{% url 'task-create' %}">Add Task</a>
+    </div>
+
+    <div class="alert alert-warning" role="alert">
+        You have <i>{{count}}</i> incomplete task{{ count|pluralize:"s" }}
+    </div>
+
+    <div class="mb-5">
+        <form method="get">
+            <div class="d-flex justify-content-between">
+                <input class="form-control" type="text" name="search" value="{{search_input}}">
+                <input class="btn btn-primary" type="submit" value="Search">
+            </div>
+        </form>
+    </div>
+
+    <div>
+        {% for task in tasks %}
+        <div class="card" style="margin: 1% 0; ">
+            <div class="card-body">
+                <h5 class="card-title">
+                    {% if task.completed %}
+                    <s>{{task}}</s> <span class="badge bg-secondary">Completed</span>
+                    {% else %}
+                    {{task}}
+                    {% endif %}
+                </h5>
+                <p class="card-text">{{task.description}}</p>
+                <p class="card-text"><small class="text-muted">{{task.create}}</small></p>
+            </div>
+            <div class="card-footer bg-transparent d-flex justify-content-between">
+                <a class="btn btn-outline-primary" href="{% url 'task-update' task.id %}">Edit</a>
+                <a class="btn btn-outline-danger" href="{% url 'task-delete' task.id %}">Delete</a>
+            </div>
+        </div>
+
+
+        {% empty %}
+        <div class="alert alert-success" role="alert">
+            No task in list
+        </div>
+        {% endfor %}
+    </div>
+
+
+
+
+</div>
+{% endblock content %}

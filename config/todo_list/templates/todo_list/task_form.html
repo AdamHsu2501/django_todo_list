@@ -1,0 +1,25 @@
+{% extends 'todo_list/main.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container">
+    <div class="mb-5">
+        <a class="btn btn-outline-primary" href="{% url 'tasks' %}">Go Back</a>
+    </div>
+
+    <form method="post" action="">
+        {% csrf_token %}
+        <div class="mb-3">
+            {{ form.title|as_crispy_field }}
+        </div>
+        <div class="mb-3">
+            {{ form.description |as_crispy_field }}
+        </div>
+        <div class="mb-3">
+            {{ form.completed |as_crispy_field }}
+        </div>
+
+        <input class="btn btn-primary" type="submit" value="Submit">
+    </form>
+</div>
+{% endblock content %}
